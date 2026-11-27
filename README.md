@@ -1,8 +1,6 @@
 # Chat Archive Exporter
 
-[![lint](https://github.com/SamUnimelb/chat-archive-exporter/actions/workflows/lint.yml/badge.svg)](https://github.com/SamUnimelb/chat-archive-exporter/actions/workflows/lint.yml)
-
-把「某国内绿色类 WhatsChat 聊天软件」（桌面版 4.x）中与指定联系人的聊天记录，导出为可长期保存的 **HTML / PDF / 纯文本 / 中英对照 **。
+把「某国内绿色类 WeahChat 聊天软件」（桌面版 4.x）中与指定联系人的聊天记录，导出为可长期保存的 **HTML / PDF / 纯文本 / 中英对照 **。
 
 > 仅限导出**本人账号**、且**已取得对话对方同意**的聊天记录。使用前请阅读文末《免责声明与使用限制》。
 
