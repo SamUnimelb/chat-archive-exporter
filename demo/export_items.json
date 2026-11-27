@@ -1,0 +1,396 @@
+[
+ {
+  "ts": 1767315720,
+  "sender": "other",
+  "type": "text",
+  "text": "早上好呀，今天降温了，出门记得加件外套。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 1
+ },
+ {
+  "ts": 1767315900,
+  "sender": "self",
+  "type": "text",
+  "text": "刚出门就后悔了，风好大。你在公司了吗？",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 2
+ },
+ {
+  "ts": 1767315960,
+  "sender": "other",
+  "type": "text",
+  "text": "到了，正在泡咖啡 ☕",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 3
+ },
+ {
+  "ts": 1767316200,
+  "sender": "self",
+  "type": "text",
+  "text": "我下午要去一趟图书馆，顺便把上次借的书还了。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 4
+ },
+ {
+  "ts": 1767316320,
+  "sender": "other",
+  "type": "text",
+  "text": "那晚上一起吃饭吗？附近新开了一家云南米线。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 5
+ },
+ {
+  "ts": 1767316380,
+  "sender": "self",
+  "type": "text",
+  "text": "好呀，六点半？",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 6
+ },
+ {
+  "ts": 1767316500,
+  "sender": "other",
+  "type": "location",
+  "text": "城市图书馆地铁站 B 口",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 7
+ },
+ {
+  "ts": 1767319500,
+  "sender": "other",
+  "type": "image",
+  "text": "这家店的菜单，看着还不错。",
+  "md5": "IMG_2026_01_02_10_05_00.jpg",
+  "duration": 0,
+  "extra": "",
+  "server_id": 1767319500,
+  "image_path": "images/IMG_2026_01_02_10_05_00.jpg",
+  "image_dims": "760x428",
+  "image_size": 21778
+ },
+ {
+  "ts": 1767319620,
+  "sender": "self",
+  "type": "text",
+  "text": "那个酸汤米线感觉很适合今天。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 9
+ },
+ {
+  "ts": 1767327600,
+  "sender": "self",
+  "type": "text",
+  "text": "我到了，人有点多，先占了个位。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 10
+ },
+ {
+  "ts": 1767327720,
+  "sender": "other",
+  "type": "text",
+  "text": "马上到，等我五分钟。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 11
+ },
+ {
+  "ts": 1767330300,
+  "sender": "other",
+  "type": "voice",
+  "text": "",
+  "md5": "",
+  "duration": 18,
+  "extra": "",
+  "server_id": 12
+ },
+ {
+  "ts": 1767330420,
+  "sender": "self",
+  "type": "sticker",
+  "text": "",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "sticker_name": "好耶",
+  "server_id": 13
+ },
+ {
+  "ts": 1767335400,
+  "sender": "self",
+  "type": "file",
+  "text": "读书笔记_2026-01.pdf",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "file_size": 1284920,
+  "server_id": 14
+ },
+ {
+  "ts": 1767335460,
+  "sender": "self",
+  "type": "text",
+  "text": "上次说的那本书，笔记整理好了。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 15
+ },
+ {
+  "ts": 1767339600,
+  "sender": "other",
+  "type": "link",
+  "text": "周末徒步路线推荐（附交通和补给点）",
+  "md5": "",
+  "duration": 0,
+  "extra": "含三条近郊路线，适合半天往返。",
+  "server_id": 16
+ },
+ {
+  "ts": 1767339660,
+  "sender": "other",
+  "type": "text",
+  "text": "周末要不要去走走？",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 17
+ },
+ {
+  "ts": 1767339900,
+  "sender": "self",
+  "type": "text",
+  "text": "可以！不过别太早，我想睡个懒觉。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 18
+ },
+ {
+  "ts": 1767339960,
+  "sender": "other",
+  "type": "sticker",
+  "text": "",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "sticker_name": "成交",
+  "server_id": 19
+ },
+ {
+  "ts": 1767401400,
+  "sender": "self",
+  "type": "text",
+  "text": "早，昨晚睡得不错。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 20
+ },
+ {
+  "ts": 1767401520,
+  "sender": "other",
+  "type": "text",
+  "text": "我也是，今天天气看着会晴。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 21
+ },
+ {
+  "ts": 1767406320,
+  "sender": "other",
+  "type": "image",
+  "text": "刚路过花市，顺手拍了一张。",
+  "md5": "IMG_2026_01_03_10_12_00.jpg",
+  "duration": 0,
+  "extra": "",
+  "server_id": 1767406320,
+  "image_path": "images/IMG_2026_01_03_10_12_00.jpg",
+  "image_dims": "760x428",
+  "image_size": 19167
+ },
+ {
+  "ts": 1767406500,
+  "sender": "self",
+  "type": "text",
+  "text": "好看，周末去逛逛？",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 23
+ },
+ {
+  "ts": 1767406560,
+  "sender": "other",
+  "type": "text",
+  "text": "好啊，顺便把那家面包店打卡了。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 24
+ },
+ {
+  "ts": 1767436200,
+  "sender": "self",
+  "type": "video",
+  "text": "",
+  "md5": "",
+  "duration": 12,
+  "extra": "",
+  "video_size": 3565158,
+  "video_path": "videos/demo.mp4",
+  "server_id": 25
+ },
+ {
+  "ts": 1767436260,
+  "sender": "self",
+  "type": "text",
+  "text": "傍晚的海边，风有点大。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 26
+ },
+ {
+  "ts": 1767442200,
+  "sender": "other",
+  "type": "quote",
+  "text": "我已经在查路线了。",
+  "md5": "",
+  "duration": 0,
+  "extra": "周末去逛逛？",
+  "server_id": 27
+ },
+ {
+  "ts": 1767445200,
+  "sender": "self",
+  "type": "text",
+  "text": "那就这么定了，晚安。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 28
+ },
+ {
+  "ts": 1767445260,
+  "sender": "other",
+  "type": "text",
+  "text": "晚安 🌙",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 29
+ },
+ {
+  "ts": 1767490200,
+  "sender": "other",
+  "type": "image",
+  "text": "早餐做了松饼，下次做给你吃。",
+  "md5": "IMG_2026_01_04_09_30_00.jpg",
+  "duration": 0,
+  "extra": "",
+  "server_id": 1767490200,
+  "image_path": "images/IMG_2026_01_04_09_30_00.jpg",
+  "image_dims": "760x428",
+  "image_size": 20278
+ },
+ {
+  "ts": 1767490380,
+  "sender": "self",
+  "type": "text",
+  "text": "看起来很不错，期待。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 31
+ },
+ {
+  "ts": 1767495600,
+  "sender": "self",
+  "type": "transfer",
+  "text": "转账 52.00",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 32
+ },
+ {
+  "ts": 1767495660,
+  "sender": "self",
+  "type": "text",
+  "text": "上次的咖啡钱～",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 33
+ },
+ {
+  "ts": 1767495720,
+  "sender": "other",
+  "type": "redpacket",
+  "text": "红包 8.88",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 34
+ },
+ {
+  "ts": 1767495780,
+  "sender": "other",
+  "type": "text",
+  "text": "收下这份好运。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 35
+ },
+ {
+  "ts": 1767499200,
+  "sender": "self",
+  "type": "card",
+  "text": "Demo Contact（户外向导）",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 36
+ },
+ {
+  "ts": 1767507600,
+  "sender": "other",
+  "type": "text",
+  "text": "收到啦，周末见。",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 37
+ },
+ {
+  "ts": 1767507660,
+  "sender": "self",
+  "type": "text",
+  "text": "周末见 👋",
+  "md5": "",
+  "duration": 0,
+  "extra": "",
+  "server_id": 38
+ }
+]

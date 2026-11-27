@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<style>
+  :root {
+    --self-bg: #95ec69;
+    --other-bg: #ffffff;
+    --meta: #8a8a8a;
+    --line: #e6e6e6;
+  }
+  @page { size: A4; margin: 14mm 12mm 16mm 12mm; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+    font-size: 10.5pt;
+    color: #1f1f1f;
+    background: #ededed;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page { max-width: 780px; margin: 0 auto; padding: 12px 10px; }
+  .cover {
+    background: #fff; border-radius: 8px; padding: 36px 34px; margin-bottom: 22px;
+    break-after: page;
+  }
+  .cover h1 { font-size: 24pt; margin: 0 0 8px; letter-spacing: 1px; }
+  .cover .sub { color: var(--meta); font-size: 11pt; margin-bottom: 26px; }
+  .cover table { border-collapse: collapse; width: 100%; font-size: 10.5pt; }
+  .cover td { padding: 7px 4px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .cover td.k { width: 120px; color: var(--meta); }
+  .notice { margin-top: 22px; padding: 14px 16px; background: #f7f7f7; border-left: 3px solid #bdbdbd;
+            color: #555; font-size: 9.5pt; line-height: 1.7; }
+  .day { text-align: center; margin: 18px 0 10px; }
+  .day span { background: #dadada; color: #555; font-size: 8.5pt; padding: 3px 10px; border-radius: 10px; }
+  .msg { display: flex; align-items: flex-start; margin: 10px 0; break-inside: avoid; }
+  .msg.self { flex-direction: row-reverse; }
+  .avatar { width: 34px; height: 34px; border-radius: 5px; overflow: hidden; flex: 0 0 34px; background: #cfcfcf; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .body { max-width: 74%; margin: 0 10px; }
+  .name { font-size: 8pt; color: var(--meta); margin-bottom: 3px; }
+  .msg.self .name { text-align: right; }
+  .bubble {
+    position: relative; display: inline-block; padding: 8px 11px; border-radius: 6px;
+    background: var(--other-bg); line-height: 1.55; white-space: pre-wrap; word-break: break-word;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.04);
+  }
+  .msg.self .bubble { background: var(--self-bg); }
+  .bubble img { max-width: 100%; max-height: 420px; border-radius: 4px; display: block; }
+  .bubble .cap { font-size: 9pt; color: var(--meta); margin-top: 5px; }
+  .voice { display: flex; align-items: center; gap: 8px; min-width: 120px; }
+  .voice .icon { font-size: 13pt; }
+  .transcript { margin-top: 6px; padding-top: 6px; border-top: 1px dashed #cfcfcf;
+                font-size: 9.5pt; color: #333; }
+  .transcript .label { color: var(--meta); font-size: 8pt; margin-right: 4px; }
+  .meta { margin-top: 4px; font-size: 7.5pt; color: #a5a5a5; text-align: right; }
+  .system { text-align: center; margin: 12px 0; color: #8a8a8a; font-size: 8.5pt; }
+  .system span { background: #dadada; padding: 3px 10px; border-radius: 8px; }
+  .filecard { display: flex; gap: 8px; align-items: center; }
+  .filecard .fi { font-size: 18pt; }
+  .filecard .fn { font-size: 9.5pt; }
+  .filecard .fs { font-size: 8pt; color: var(--meta); }
+  .placeholder { color: #777; font-style: italic; }
+  .footer { margin-top: 26px; text-align: center; color: #aaa; font-size: 8pt; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <section class="cover">
+    <h1>{{ title }}</h1>
+    <div class="sub">{{ subtitle }}</div>
+    <table>
+      <tr><td class="k">对话双方</td><td>{{ account.self_display }} &nbsp;↔&nbsp; {{ account.target_display }}</td></tr>
+      <tr><td class="k">我的微信号</td><td>{{ account.self_wxid }}</td></tr>
+      <tr><td class="k">对方微信号</td><td>{{ account.target_alias }}（{{ account.target_wxid }}）</td></tr>
+      <tr><td class="k">记录区间</td><td>{{ stats.first_time }} — {{ stats.last_time }}</td></tr>
+      <tr><td class="k">消息总数</td><td>{{ stats.total }} 条（文字 {{ stats.text }}，图片 {{ stats.image }}，语音 {{ stats.voice }}，视频 {{ stats.video }}）</td></tr>
+      <tr><td class="k">生成时间</td><td>{{ generated_at }}</td></tr>
+    </table>
+    <div class="notice">
+      本文件由本人在自己登录的电脑版微信中导出，内容为双方真实聊天记录的原始呈现，未做删改或拼接。
+      语音消息由本地语音识别模型转写，可能存在识别误差，转写文本仅供参考，原始语音时长与顺序保持完整。
+      导出与使用已取得对话双方同意，仅用于个人纪念及签证关系证明材料。
+    </div>
+  </section>
+
+  {% for day in days %}
+  <div class="day"><span>{{ day.date }}</span></div>
+  {% for m in day.messages %}
+    {% if m.sender == 'system' %}
+      <div class="system"><span>{{ m.text }}</span></div>
+    {% else %}
+      <div class="msg {{ 'self' if m.sender == 'self' else 'other' }}">
+        <div class="avatar">
+          {% if m.avatar %}<img src="{{ m.avatar }}">{% endif %}
+        </div>
+        <div class="body">
+          <div class="name">{{ m.name }}</div>
+          <div class="bubble">
+            {% if m.type == 'text' %}
+              {{ m.text }}
+            {% elif m.type == 'image' %}
+              {% if m.image_path %}<img src="{{ m.image_path }}">{% else %}<span class="placeholder">[图片]</span>{% endif %}
+              {% if m.text %}<div class="cap">{{ m.text }}</div>{% endif %}
+            {% elif m.type == 'voice' %}
+              <div class="voice">
+                <span class="icon">🎙</span>
+                <span>语音 {{ m.duration }}″</span>
+              </div>
+              {% if m.transcript %}
+              <div class="transcript"><span class="label">转写</span>{{ m.transcript }}</div>
+              {% endif %}
+            {% elif m.type == 'video' %}
+              <div class="voice"><span class="icon">🎬</span><span>视频 {{ m.duration }}″</span></div>
+              {% if m.text %}<div class="cap">{{ m.text }}</div>{% endif %}
+            {% elif m.type == 'sticker' %}
+              {% if m.image_path %}<img src="{{ m.image_path }}">{% else %}<span class="placeholder">[表情]</span>{% endif %}
+            {% elif m.type == 'file' %}
+              <div class="filecard"><span class="fi">📄</span>
+                <div><div class="fn">{{ m.text }}</div></div>
+              </div>
+            {% elif m.type == 'link' %}
+              <div><strong>{{ m.text }}</strong>{% if m.extra %}<div class="cap">{{ m.extra }}</div>{% endif %}</div>
+            {% else %}
+              <span class="placeholder">[{{ m.text or '消息' }}]</span>
+            {% endif %}
+          </div>
+          <div class="meta">{{ m.time }}</div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% endfor %}
+
+  <div class="footer">— 共 {{ stats.total }} 条消息，{{ days|length }} 天 —</div>
+</div>
+</body>
+</html>

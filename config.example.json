@@ -1,0 +1,37 @@
+{
+  "account": {
+    "self_wxid": "wxid_your_own_account",
+    "self_display": "我",
+    "target_wxid": "wxid_target_account",
+    "target_alias": "target_wechat_id",
+    "target_remark": "对方备注",
+    "target_display": "对方备注"
+  },
+  "paths": {
+    "data_root": "D:\\path\\to\\xwechat_files\\wxid_your_own_account",
+    "db_storage": "D:\\path\\to\\xwechat_files\\wxid_your_own_account\\db_storage",
+    "target_attach": "D:\\path\\to\\xwechat_files\\wxid_your_own_account\\msg\\attach\\<talker_hash>",
+    "video_root": "D:\\path\\to\\xwechat_files\\wxid_your_own_account\\msg\\video",
+    "output": "output",
+    "assets": "assets"
+  },
+  "crypto": {
+    "image_code": 0,
+    "image_key": "",
+    "image_xor": 0,
+    "db_password": "",
+    "db_keys_file": "output/keys.json"
+  },
+  "export": {
+    "title": "我们的聊天记录",
+    "subtitle": "A record of our conversations",
+    "include_system_messages": false,
+    "voice_transcribe": true,
+    "max_image_width_px": 520,
+    "pdf": {
+      "page": "A4",
+      "margin_mm": 12,
+      "print_background": true
+    }
+  }
+}

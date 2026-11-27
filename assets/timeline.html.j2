@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Microsoft YaHei", "Noto Sans SC", sans-serif;
+         font-size: 10pt; line-height: 1.55; color: #1f1f1f; }
+  .cover { page-break-after: always; padding-top: 18mm; }
+  h1 { font-size: 26pt; margin: 0 0 6px; letter-spacing: 2px; }
+  .sub { color: #777; font-size: 11pt; margin-bottom: 24px; }
+  .who { font-size: 12pt; margin-bottom: 18px; }
+  table { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+  td { padding: 6px 4px; border-bottom: 1px solid #e5e5e5; vertical-align: top; }
+  td.k { width: 110px; color: #777; }
+  .keydates { margin-top: 22px; }
+  .keydates h3 { font-size: 12pt; margin: 0 0 8px; }
+  .kd { margin: 5px 0; font-size: 9.5pt; }
+  .kd b { color: #8a5a2b; }
+  .note { margin-top: 20px; color: #777; font-size: 8.5pt; line-height: 1.6; }
+  .month { page-break-inside: avoid; margin: 18px 0 8px; }
+  .month h2 { font-size: 14pt; margin: 0 0 2px; color: #8a5a2b; }
+  .mstats { color: #777; font-size: 8.5pt; margin-bottom: 6px; }
+  .item { border-left: 2px solid #d9c2a8; padding: 4px 0 4px 10px; margin: 7px 0;
+          page-break-inside: avoid; }
+  .tag { display: inline-block; background: #f3e9df; color: #8a5a2b;
+         font-size: 7.5pt; padding: 1px 6px; border-radius: 6px; margin-right: 6px; }
+  .when { color: #888; font-size: 8.5pt; }
+  .who2 { font-weight: bold; font-size: 9pt; margin: 2px 0; }
+  .quote { font-size: 9.5pt; color: #333; white-space: pre-wrap; }
+  .footer { margin-top: 24px; text-align: center; color: #aaa; font-size: 8pt; }
+</style>
+</head>
+<body>
+  <section class="cover">
+    <h1>{{ title }}</h1>
+    <div class="sub">{{ subtitle }}</div>
+    <div class="who">{{ account.self_display }} &nbsp;↔&nbsp; {{ account.target_display }}</div>
+    <table>
+      <tr><td class="k">我的微信号</td><td>{{ account.self_wxid }}</td></tr>
+      <tr><td class="k">对方微信号</td><td>{{ account.target_alias }}（{{ account.target_wxid }}）</td></tr>
+      <tr><td class="k">记录区间</td><td>{{ stats.first_time }} — {{ stats.last_time }}（{{ stats.days }} 天）</td></tr>
+      <tr><td class="k">消息总数</td><td>{{ stats.total }} 条（文字 {{ stats.text }}，图片 {{ stats.image }}，语音 {{ stats.voice }}，视频 {{ stats.video }}，文件 {{ stats.file }}）</td></tr>
+      <tr><td class="k">活跃月份</td><td>{{ stats.top_months }}</td></tr>
+      <tr><td class="k">生成时间</td><td>{{ generated_at }}</td></tr>
+    </table>
+    <div class="keydates">
+      <h3>关系关键节点（自动提取）</h3>
+      {% for kd in keydates %}
+      <div class="kd"><b>{{ kd.tag }}</b> · {{ kd.when }} · {{ kd.name }}：{{ kd.text }}</div>
+      {% endfor %}
+    </div>
+    <div class="note">
+      本时间线基于聊天文本中的关键词自动提取，用于快速回顾关系发展，不是完整叙事；
+      关键节点均可在完整聊天记录 PDF/HTML 中核对原文。语音未转写，图片/视频未纳入本摘要。
+    </div>
+  </section>
+
+  {% for month in months %}
+  <section class="month">
+    <h2>{{ month.ym }}</h2>
+    <div class="mstats">{{ month.stats }}</div>
+    {% for item in month.entries %}
+    <div class="item">
+      <span class="tag">{{ item.tag }}</span><span class="when">{{ item.date }} {{ item.time }}</span>
+      <div class="who2">{{ item.name }}</div>
+      <div class="quote">{{ item.text }}</div>
+    </div>
+    {% endfor %}
+  </section>
+  {% endfor %}
+
+  <div class="footer">— 关系时间线 · {{ stats.total }} 条消息 · {{ months|length }} 个月 —</div>
+</body>
+</html>

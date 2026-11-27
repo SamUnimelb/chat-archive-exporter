@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<style>
+  @page { size: A4; margin: 12mm 12mm 14mm 12mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Microsoft YaHei", "Noto Sans SC", sans-serif;
+         font-size: 8.9pt; line-height: 1.38; color: #111; }
+  h1 { font-size: 14pt; margin: 0 0 3px; }
+  .meta { color: #666; font-size: 8.2pt; margin-bottom: 6px; }
+  .note { color: #777; font-size: 7.6pt; margin-bottom: 10px; }
+  .day { font-weight: bold; font-size: 10pt; margin: 9px 0 3px;
+         border-bottom: 1px solid #ddd; padding-bottom: 1px; }
+  .line { margin: 0; padding: 1px 0; white-space: pre-wrap; word-break: break-word; }
+  .tr { margin: 0 0 2px 0; color: #555; font-style: italic;
+        font-size: 8.2pt; white-space: pre-wrap; word-break: break-word; }
+  .time { color: #777; font-family: Consolas, "Courier New", monospace; }
+  .name { font-weight: bold; }
+</style>
+</head>
+<body>
+  <h1>{{ title }}</h1>
+  <div class="meta">
+    {{ account.self_display }}（{{ account.self_wxid }}） ↔
+    {{ account.target_display }}（{{ account.target_alias }} / {{ account.target_wxid }}）
+    · {{ stats.first_time }} — {{ stats.last_time }} · 共 {{ stats.total }} 条
+  </div>
+  <div class="note">
+    第三方信息已自动打码（姓名/电话/证件号/邮箱/链接等）；英文为离线机器翻译，仅供参考，原文为准。
+  </div>
+  {% for day in days %}
+  <div class="day">{{ day.date }}</div>
+  {% for m in day.messages %}
+  <div class="line"><span class="time">{{ m.time }}</span> <span class="name">{{ m.name }}</span>：{{ m.original }}</div>
+  {% if m.translation %}<div class="tr">{{ m.translation }}</div>{% endif %}
+  {% endfor %}
+  {% endfor %}
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<style>
+  :root { --self-bg: #95ec69; --other-bg: #fff; --meta: #8a8a8a; }
+  @page { size: A4; margin: 9mm 9mm 11mm 9mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Microsoft YaHei", "Noto Sans SC", sans-serif;
+         font-size: 8pt; line-height: 1.32; color: #1f1f1f; background: #ededed;
+         -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 820px; margin: 0 auto; padding: 4px 4px; }
+  .cover { background: #fff; border-radius: 6px; padding: 18px 20px; margin-bottom: 10px;
+           break-after: page; }
+  .cover h1 { font-size: 16pt; margin: 0 0 4px; }
+  .cover .sub { color: var(--meta); font-size: 9pt; margin-bottom: 12px; }
+  .cover table { border-collapse: collapse; width: 100%; font-size: 8.5pt; }
+  .cover td { padding: 3px 3px; border-bottom: 1px solid #eee; }
+  .cover td.k { width: 100px; color: var(--meta); }
+  .notice { margin-top: 10px; padding: 8px 10px; background: #f7f7f7;
+            border-left: 2px solid #bdbdbd; color: #555; font-size: 7.5pt; line-height: 1.5; }
+  .day { text-align: center; margin: 6px 0 3px; }
+  .day span { background: #dadada; color: #555; font-size: 7pt; padding: 1px 7px; border-radius: 7px; }
+  .msg { display: flex; align-items: flex-start; margin: 2px 0; break-inside: avoid; }
+  .msg.self { flex-direction: row-reverse; }
+  .avatar { width: 22px; height: 22px; border-radius: 4px; overflow: hidden; flex: 0 0 22px; background: #cfcfcf; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .body { max-width: 48%; margin: 0 6px; }
+  .name { font-size: 6.5pt; color: var(--meta); margin-bottom: 1px; }
+  .msg.self .name { text-align: right; }
+  .bubble { display: inline-block; padding: 3px 6px; border-radius: 5px;
+            background: var(--other-bg); white-space: pre-wrap; word-break: break-word;
+            box-shadow: 0 0 0 1px rgba(0,0,0,.04); }
+  .msg.self .bubble { background: var(--self-bg); }
+  .bubble img { max-width: 170px; max-height: 170px; border-radius: 3px; display: block; }
+  .bubble .cap { font-size: 7pt; color: var(--meta); margin-top: 2px; }
+  .voice { display: flex; align-items: center; gap: 4px; min-width: 80px; }
+  .voice .icon { font-size: 9pt; }
+  .transcript { margin-top: 2px; padding-top: 2px; border-top: 1px dashed #cfcfcf;
+                font-size: 7pt; color: #333; }
+  .meta { margin-top: 1px; font-size: 6pt; color: #a5a5a5; text-align: right; }
+  .system { text-align: center; margin: 4px 0; color: #8a8a8a; font-size: 7pt; }
+  .system span { background: #dadada; padding: 1px 7px; border-radius: 6px; }
+  .filecard { display: flex; gap: 4px; align-items: center; }
+  .placeholder { color: #777; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="cover">
+    <h1>{{ title }}</h1>
+    <div class="sub">{{ subtitle }}</div>
+    <table>
+      <tr><td class="k">对话双方</td><td>{{ account.self_display }} ↔ {{ account.target_display }}</td></tr>
+      <tr><td class="k">我的微信号</td><td>{{ account.self_wxid }}</td></tr>
+      <tr><td class="k">对方微信号</td><td>{{ account.target_alias }}（{{ account.target_wxid }}）</td></tr>
+      <tr><td class="k">记录区间</td><td>{{ stats.first_time }} — {{ stats.last_time }}</td></tr>
+      <tr><td class="k">消息总数</td><td>{{ stats.total }} 条（文字 {{ stats.text }}，图片 {{ stats.image }}，语音 {{ stats.voice }}，视频 {{ stats.video }}）</td></tr>
+      <tr><td class="k">生成时间</td><td>{{ generated_at }}</td></tr>
+    </table>
+    <div class="notice">
+      本文件由本人在自己登录的电脑版微信中导出，内容为双方真实聊天记录的原始呈现，未做删改或拼接。
+      语音消息仅标注时长，未做转写；图片为解密后导出，未缓存原图时使用缩略图。
+    </div>
+  </section>
+
+  {% for day in days %}
+  <div class="day"><span>{{ day.date }}</span></div>
+  {% for m in day.messages %}
+    {% if m.sender == 'system' %}
+      <div class="system"><span>{{ m.text }}</span></div>
+    {% else %}
+      <div class="msg {{ 'self' if m.sender == 'self' else 'other' }}">
+        <div class="avatar">{% if m.avatar %}<img src="{{ m.avatar }}">{% endif %}</div>
+        <div class="body">
+          <div class="name">{{ m.name }}</div>
+          <div class="bubble">
+            {% if m.type == 'text' %}{{ m.text }}
+            {% elif m.type == 'image' %}{% if m.image_path %}<img src="{{ m.image_path }}">{% else %}<span class="placeholder">[图片]</span>{% endif %}
+            {% elif m.type == 'voice' %}<div class="voice"><span class="icon">🎙</span><span>语音 {{ m.duration }}″</span></div>{% if m.transcript %}<div class="transcript">{{ m.transcript }}</div>{% endif %}
+            {% elif m.type == 'video' %}<div class="voice"><span class="icon">🎬</span><span>视频 {{ m.duration }}″</span></div>
+            {% elif m.type == 'file' %}<div class="filecard"><span>📄</span><span>{{ m.text }}</span></div>
+            {% elif m.type == 'link' %}<div><strong>{{ m.text }}</strong>{% if m.extra %}<div class="cap">{{ m.extra }}</div>{% endif %}</div>
+            {% else %}{{ m.text }}{% endif %}
+          </div>
+          <div class="meta">{{ m.time }}</div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+  {% endfor %}
+</div>
+</body>
+</html>

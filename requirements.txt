@@ -1,0 +1,8 @@
+pycryptodome>=3.20
+cryptography>=42
+lxml>=5
+Jinja2>=3.1
+Pillow>=10
+zstandard>=0.22
+pypdf>=5
+# 可选：中英对照功能需要 argostranslate（体积较大，按需安装）
