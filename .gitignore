@@ -1,0 +1,29 @@
+# ---- local config / secrets ----
+config.json
+output/keys.json
+*keys*.json
+key_windows.txt
+
+# ---- exported data (never commit) ----
+output/
+
+# ---- databases / raw media ----
+*.db
+*.db-wal
+*.db-shm
+*.dat
+*.silk
+
+# ---- personal documents ----
+WechatRecord.docx
+~$*
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- generated demo output ----
+demo/demo.html
+demo/demo.pdf
