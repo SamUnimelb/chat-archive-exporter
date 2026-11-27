@@ -53,6 +53,16 @@ copy config.example.json config.json
 
 > 该步骤可能违反目标软件的服务条款，并受当地反规避、计算机犯罪与隐私法律约束。请自行评估风险，并确保已获得对话对方的同意。
 
+### 导入与校验密钥
+
+拿到密钥后，按 [`docs/GETTING_KEY.md`](docs/GETTING_KEY.md) 的格式写入 `output/keys.json`，先校验再导出：
+
+```bat
+python src/import_key.py --keys output/keys.json --db-dir "D:\path\to\db_storage"
+```
+
+`import_key.py` 只读取本地数据库文件做 PBKDF2/AES 校验，**不访问任何运行中的进程**；校验通过后再执行后续导出。
+
 ## 使用
 
 ```bat
